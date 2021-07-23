@@ -15,7 +15,7 @@ import { Role } from './Entities/role.entity';
 export class RoleController {
   constructor(private readonly _roleService: RoleService) {}
 
-  @Get()
+  @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Role> {
     return await this._roleService.getOne(id);
   }

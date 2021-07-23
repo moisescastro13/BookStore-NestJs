@@ -7,16 +7,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import { User } from './Entities/user.entity';
 import { Status } from './UserStatus.enum';
-import { UserDetails } from './Entities/userDetails.entity';
-import { RoleRepository } from '../role/role.repository';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserRepository)
     private readonly _userRepository: UserRepository,
-    @InjectRepository(RoleRepository)
-    private readonly _roleRepository: RoleRepository,
   ) {}
 
   async getOne(id: number): Promise<User> {
@@ -43,14 +39,6 @@ export class UserService {
     if (!user) {
       throw new BadRequestException();
     }
-    const details = new UserDetails();
-    details.name = 'user';
-    user.details = details;
-    const defaultRole = await this._roleRepository.findOne({
-      where: { name: 'GENERAL' },
-    });
-    user.roles = [defaultRole];
-
     const savedUser = await this._userRepository.save(user);
     return savedUser;
   }
