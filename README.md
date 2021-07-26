@@ -46,12 +46,13 @@ $ npm run start:prod
 ```
 
 ## Migrations examples
-
+```bash
 $ npm run migration:generate -n firts_migration
 
 $ npm run migration:run
 
 $ npm run migration:revert 
+```
 
 ## Test
 
