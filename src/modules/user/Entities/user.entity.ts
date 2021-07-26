@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import { Role } from '../../role/Entities/role.entity';
 import { UserDetails } from './userDetails.entity';
-import { Status } from '../UserStatus.enum';
+import { Status } from '../../../Share/Enums';
 
 @Entity('users')
 export class User extends BaseEntity {

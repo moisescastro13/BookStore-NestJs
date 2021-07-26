@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import { User } from './Entities/user.entity';
-import { Status } from './UserStatus.enum';
+import { Status } from '../../Share/Enums';
 
 @Injectable()
 export class UserService {

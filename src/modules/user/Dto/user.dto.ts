@@ -1,4 +1,4 @@
-import { RoleType } from '../../role/roleType.enum';
+import { RoleType } from '../../../Share/Enums';
 import { UserDetails } from '../Entities/userDetails.entity';
 export class UserDto {
   id: number;

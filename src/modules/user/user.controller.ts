@@ -7,7 +7,9 @@ import {
   Param,
   ParseIntPipe,
   Body,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { User } from './Entities/user.entity';
 import { UserService } from './user.service';
 
@@ -18,7 +20,7 @@ export class UserController {
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return await this._userService.getOne(id);
   }
-
+  @UseGuards(AuthGuard())
   @Get()
   async findAll(): Promise<User[]> {
     return await this._userService.getAll();

@@ -1,5 +1,5 @@
 import { User } from '../../user/Entities/user.entity';
-import { Status } from '../../user/UserStatus.enum';
+import { Status } from '../../../Share/Enums';
 import {
   Entity,
   BaseEntity,

@@ -7,7 +7,7 @@ import { ConfigService } from '../../../config/config.service';
 import { Configuration } from '../../../config/config.keys';
 import { AuthRepository } from '../auth.repository';
 import { IJwtPayload } from '../Interfaces/jwt-payload.interface';
-import { Status } from '../../user/UserStatus.enum';
+import { Status } from '../../../Share/Enums';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
