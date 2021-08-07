@@ -10,16 +10,22 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../role/decorators/role.decorator';
+import { RoleGuard } from '../role/guards/role.guard';
 import { User } from './Entities/user.entity';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly _userService: UserService) {}
+
+  @Roles('ADMIN', 'AUTHOR')
+  @UseGuards(AuthGuard(), RoleGuard)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return await this._userService.getOne(id);
   }
+
   @UseGuards(AuthGuard())
   @Get()
   async findAll(): Promise<User[]> {
