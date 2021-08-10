@@ -17,10 +17,8 @@ import { BookModule } from './modules/book/book.module';
     UserModule,
     RoleModule,
     AuthModule,
-    BookModule
+    BookModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {
   static port: number | string;
