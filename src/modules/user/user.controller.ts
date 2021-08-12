@@ -10,8 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { RoleType } from '../../Share/Enums';
 import { Roles } from '../role/decorators/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
+import { ReadUserDto, UpdateUserDto } from './Dto';
 import { User } from './Entities/user.entity';
 import { UserService } from './user.service';
 
@@ -19,42 +21,37 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 
-  @Roles('ADMIN', 'AUTHOR')
+  @Roles(RoleType.ADMIN, RoleType.AUTHOR)
   @UseGuards(AuthGuard(), RoleGuard)
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return await this._userService.getOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<ReadUserDto> {
+    return this._userService.getOne(id);
   }
 
   @UseGuards(AuthGuard())
   @Get()
-  async findAll(): Promise<User[]> {
-    return await this._userService.getAll();
-  }
-
-  @Post('create')
-  async createUser(@Body() user: User): Promise<User> {
-    return await this._userService.create(user);
+  findAll(): Promise<ReadUserDto[]> {
+    return this._userService.getAll();
   }
 
   @Put(':id')
-  async updateUser(
+  updateUser(
     @Param('id', ParseIntPipe) id: number,
-    @Body() user: User,
-  ): Promise<void> {
-    return await this._userService.update(id, user);
+    @Body() user: UpdateUserDto,
+  ): Promise<ReadUserDto> {
+    return this._userService.update(id, user);
   }
 
   @Delete(':id')
-  async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return await this._userService.delete(id);
+  deleteUser(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this._userService.delete(id);
   }
 
   @Post('/setRole/:userId/:roleId')
-  async setRoleToUser(
+  setRoleToUser(
     @Param('userId', ParseIntPipe) userId: number,
     @Param('roleId', ParseIntPipe) roleId: number,
-  ) {
+  ): Promise<boolean> {
     return this._userService.setRoleToUser(userId, roleId);
   }
 }
