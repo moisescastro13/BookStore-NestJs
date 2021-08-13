@@ -5,9 +5,9 @@
     "password": "postgres",
     "database": "bookstore",
     "port": 5432,
+    "entities": ["dist/modules/**/**/*.entity{.ts,.js}"],
+    "migrations": ["dist/database/migrations/*{.ts,.js}"],
     "synchronize": true,
-    "entities": ["src/**/**/*.entity{.ts,.js}"],
-    "migrations": ["src/database/migrations/*{.ts,.js}"],
     "cli": {
         "entitiesDir": "src/entity",
         "migrationsDir": "src/database/migrations"

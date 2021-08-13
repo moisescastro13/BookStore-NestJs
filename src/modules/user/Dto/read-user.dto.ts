@@ -1,7 +1,9 @@
-import { Type } from 'class-transformer';
+import { Exclude, Type } from 'class-transformer';
 import { IsEmail, IsNumber, IsString } from 'class-validator';
+import { ReadRoleDto } from '../../role/Dto';
 import { ReadUserDetailDto } from './read-details.dto';
 
+@Exclude()
 export class ReadUserDto {
   @IsNumber()
   readonly id: number;
@@ -14,4 +16,7 @@ export class ReadUserDto {
 
   @Type(type => ReadUserDetailDto)
   readonly detail: ReadUserDetailDto;
+
+  @Type(type => ReadRoleDto)
+  readonly roles: ReadRoleDto[];
 }

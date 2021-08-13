@@ -18,7 +18,7 @@ export const DatabaseProviders = [
         port: Number(config.get(Configuration.DBPORT)),
         synchronize: false,
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        migrations: [__dirname + '/migrations/*.entity{.ts,.js}'],
+        migrations: [__dirname + '/migrations/*.{.ts,.js}'],
       } as ConnectionOptions;
     },
   }),

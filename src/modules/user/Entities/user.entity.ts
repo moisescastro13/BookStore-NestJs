@@ -15,6 +15,7 @@ import { Role } from '../../role/Entities/role.entity';
 import { UserDetails } from './userDetails.entity';
 import { Status } from '../../../Share/Enums';
 import { genSalt, hash } from 'bcryptjs';
+import { Book } from 'src/modules/book/Entities/book.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -41,6 +42,10 @@ export class User extends BaseEntity {
   @ManyToMany(type => Role, role => role.users, { eager: true })
   @JoinTable({ name: 'user_roles' })
   roles: Role[];
+
+  @ManyToMany(type => Book, book => book.authors)
+  @JoinTable({ name: 'user_books' })
+  books: Book[];
 
   @Column({ type: 'varchar', default: Status.ACTIVE, length: 8 })
   status: string;
